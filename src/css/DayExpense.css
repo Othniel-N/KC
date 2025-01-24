@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .day-expense-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  .form-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input,
+  select,
+  textarea {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .form-section {
+    margin-bottom: 20px;
+  }
+  
+  .material-entry {
+    margin-top: 10px;
+  }
+  
+  .add-material-btn,
+  .remove-material-btn,
+  .submit-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-material-btn:hover,
+  .remove-material-btn:hover,
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .remove-material-btn {
+    background-color: #dc3545;
+  }
+  
+  .remove-material-btn:hover {
+    background-color: #b02a37;
+  }
+  
+  .materials-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+  
+  .materials-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .materials-item button {
+    font-size: 12px;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .day-expense-form {
+      padding: 15px;
+    }
+  
+    .form-group {
+      margin-bottom: 10px;
+    }
+  
+    input,
+    select,
+    textarea {
+      font-size: 13px;
+    }
+  
+    .materials-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .materials-item button {
+      align-self: flex-end;
+    }
+  }
+  
