@@ -17,7 +17,7 @@ const ProjectManager = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/projects");
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/projects`);
         console.log("Fetched Projects:", response.data);
         setProjects(response.data);
       } catch (error) {
@@ -28,7 +28,7 @@ const ProjectManager = () => {
   }, []);
 
   const refreshProjects = async () => {
-    const response = await axios.get("http://localhost:5000/api/projects");
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/projects`);
     setProjects(response.data);
   };
 
@@ -40,7 +40,7 @@ const ProjectManager = () => {
 
   const handleStatusChange = async (newStatus, phaseId, projectId) => {
     try {
-      await axios.put(`http://localhost:5000/api/projects/update-phase/${projectId}/${phaseId}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/projects/update-phase/${projectId}/${phaseId}`, {
         status: newStatus,
       });
       refreshProjects(); // Refresh the projects to reflect the changes
@@ -49,13 +49,12 @@ const ProjectManager = () => {
     }
   };
 
-
   // Handle Delete Project
   const handleDeleteProject = async (projectId) => {
     const isConfirmed = window.confirm("Are you sure you want to delete this project?");
     if (isConfirmed) {
       try {
-        await axios.delete(`http://localhost:5000/api/projects/delete/${projectId}`);
+        await axios.delete(`${process.env.REACT_APP_API_URL}/projects/delete/${projectId}`);
         refreshProjects();
       } catch (error) {
         console.error("Error deleting project:", error);
@@ -64,9 +63,9 @@ const ProjectManager = () => {
   };
 
   return (
-<div className="d-flex justify-content-between align-items-center mb-4">
-  <h1 className="text-center flex-grow-1">Project Manager</h1>
-  <Button onClick={handleShowPopup} className="btn-primary create-project-btn">Create New Project</Button>
+    <div className="d-flex justify-content-between align-items-center mb-4">
+      <h1 className="text-center flex-grow-1">Project Manager</h1>
+      <Button onClick={handleShowPopup} className="btn-primary create-project-btn">Create New Project</Button>
       <NewProjectPopup show={showPopup} onClose={handleClosePopup} />
       {/* Removed Start Project button */}
 

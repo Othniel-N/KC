@@ -31,7 +31,7 @@ const NewProjectPopup = ({ show, onClose, refreshProjects }) => {
         type,
         phases
       };
-      await axios.post("http://localhost:5000/api/projects/create", newProject);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/projects/create`, newProject);
       onClose();
       refreshProjects();
     } catch (error) {
@@ -85,6 +85,7 @@ const NewProjectPopup = ({ show, onClose, refreshProjects }) => {
               <option value="single storey">Single Storey</option>
               <option value="multi storey">Multi Storey</option>
               <option value="renovation">Renovation</option>
+              <option value="custom">Custom</option>
             </Form.Control>
           </Form.Group>
 

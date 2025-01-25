@@ -6,6 +6,7 @@
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Summary Boxes Layout */
@@ -23,8 +24,14 @@
   border-radius: 8px;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px; /* Add margin for spacing between rows */
+  margin-bottom: 20px;
   min-width: 250px; /* Ensure minimum width for smaller screens */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summary-box:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .summary-box h3 {
@@ -61,7 +68,14 @@
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  min-width: 250px; /* Ensure minimum width for smaller screens */
+  min-width: 250px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recent-expenses:hover,
+.top-expenses:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Recent Expenses */
@@ -75,6 +89,11 @@
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+.expense-item:hover {
+  background-color: #f1f1f1; /* Hover effect on list items */
 }
 
 .expense-dot {
@@ -105,6 +124,11 @@
   justify-content: space-between;
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+
+.top-expense-item:hover {
+  background-color: #f1f1f1; /* Hover effect on list items */
 }
 
 .top-expense-name {
@@ -125,33 +149,33 @@
 
   .summary-box {
     flex: 1 1 45%; /* Allow 2 items per row */
-    margin-bottom: 10px; /* Reduced margin for better spacing */
+    margin-bottom: 10px;
   }
 
   .bottom-section {
-    flex-direction: column; /* Stack bottom section items vertically */
+    flex-direction: column;
   }
 
   .recent-expenses,
   .top-expenses {
     flex: 1 1 100%; /* Ensure each takes full width */
-    margin-bottom: 10px; /* Reduced margin */
+    margin-bottom: 10px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .summary-box {
-    flex: 1 1 100%; /* Stack all items vertically */
+    flex: 1 1 100%;
   }
 
   .expense-item {
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-start; /* Align to the left */
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .expense-details {
     padding-left: 0;
-    margin-bottom: 10px; /* Add space between details and total */
+    margin-bottom: 10px;
   }
 
   .bottom-section {

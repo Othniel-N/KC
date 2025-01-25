@@ -9,12 +9,12 @@ const ReportComponent = () => {
 
   useEffect(() => {
     // Fetch main report data
-    axios.get('http://localhost:5000/api/day-expenses')
+    axios.get(`${process.env.REACT_APP_API_URL}/day-expenses`)
       .then(response => setData(response.data))
       .catch(error => console.error('Error fetching data:', error));
 
     // Fetch breakdown data
-    axios.get('http://localhost:5000/api/day-expenses')  // Adjust API endpoint for breakdown data
+    axios.get(`${process.env.REACT_APP_API_URL}/day-expenses`)  // Adjust API endpoint for breakdown data
       .then(response => setBreakdownData(response.data))
       .catch(error => console.error('Error fetching breakdown data:', error));
   }, []);
@@ -47,9 +47,9 @@ const ReportComponent = () => {
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0); // Black color
     doc.text(`Date: ${new Date().toLocaleDateString()}`, 10, 40);
-    doc.text('Name: Gangadharan', 10, 50);
+    doc.text('Name: Gangadharan.R', 10, 50);
     doc.text('Position: Engineer', 10, 60);
-    doc.text('Office Address: [Your Office Address]', 150, 40, { align: 'right' });
+    doc.text('Office Address: 2/74I Karlax Construction, Adayakarungulam', 190, 40, { align: 'right' });
 
     // Add remark about raw materials not being included
     doc.setFontSize(10);
@@ -73,7 +73,7 @@ const ReportComponent = () => {
     // Breakdown Table (Grouped by Site)
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(14);
-    doc.text('Expense Breakdown', 105, doc.lastAutoTable.finalY + 20, { align: 'center' });
+    // doc.text('Expense Breakdown', 105, doc.lastAutoTable.finalY + 20, { align: 'center' });
 
     // Iterate through each site and generate its breakdown
     let startY = doc.lastAutoTable.finalY + 10;

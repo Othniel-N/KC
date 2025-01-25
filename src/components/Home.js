@@ -14,7 +14,7 @@ export default function Home() {
     const fetchData = async () => {
       try {
         // Fetch day expenses
-        const expensesResponse = await axios.get("http://localhost:5000/api/day-expenses");
+        const expensesResponse = await axios.get(`${process.env.REACT_APP_API_URL}/day-expenses`);
         const expenses = expensesResponse.data;
 
         // Calculate total expenses
@@ -30,7 +30,7 @@ export default function Home() {
         setWeeklyExpenses(weeklyTotal);
 
         // Fetch total material cost in inventory
-        const inventoryResponse = await axios.get("http://localhost:5000/api/materials");
+        const inventoryResponse = await axios.get(`${process.env.REACT_APP_API_URL}/materials`);
         const inventory = inventoryResponse.data;
 
         const inventoryCost = inventory.reduce(

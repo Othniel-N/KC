@@ -4,10 +4,11 @@ import "../css/DayExpense.css"; // Import the CSS file
 
 const DayExpenseForm = () => {
   const [materials, setMaterials] = useState([]);
+  const [laborCharges, setLaborCharges] = useState([]);
   const [formData, setFormData] = useState({
     siteName: "",
     date: new Date().toISOString().slice(0, 10),
-    labourExpenses: "",
+    labourExpenses: "", // This will be replaced by dropdown
     miscExpenses: "",
     transportationCost: "",
     equipmentRentalCost: "",
@@ -28,17 +29,40 @@ const DayExpenseForm = () => {
     quantityUsed: "",
   });
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/materials");
+        const response = await axios.get(`${API_URL}/materials`);
         setMaterials(response.data);
       } catch (error) {
         console.error("Error fetching materials:", error);
       }
     };
+
+    const fetchLaborCharges = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/labor-charges`);
+        const chargesForToday = response.data.filter(
+          (charge) => new Date(charge.date).toISOString().slice(0, 10) === formData.date
+        );
+        setLaborCharges(chargesForToday);
+        // Automatically select the first available charge if it exists
+        if (chargesForToday.length > 0) {
+          setFormData((prev) => ({
+            ...prev,
+            labourExpenses: chargesForToday[0].totalCharges,
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching labor charges:", error);
+      }
+    };
+
     fetchMaterials();
-  }, []);
+    fetchLaborCharges();
+  }, [formData.date]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -91,7 +115,7 @@ const DayExpenseForm = () => {
       Number(formData.otherExpenses || 0);
 
     try {
-      await axios.post("http://localhost:5000/api/day-expenses", {
+      await axios.post(`${API_URL}/day-expenses`, {
         ...formData,
         totalExpenses,
       });
@@ -100,7 +124,7 @@ const DayExpenseForm = () => {
       setFormData({
         siteName: "",
         date: new Date().toISOString().slice(0, 10),
-        labourExpenses: "",
+        labourExpenses: "", // Reset labour expenses
         miscExpenses: "",
         transportationCost: "",
         equipmentRentalCost: "",
@@ -148,8 +172,23 @@ const DayExpenseForm = () => {
       {/* Expense Fields */}
       <div className="form-section">
         <h3>Expenses</h3>
+        <div className="form-group">
+          <label>Labour Expenses:</label>
+          <select
+            name="labourExpenses"
+            value={formData.labourExpenses}
+            onChange={handleInputChange}
+          >
+            <option value="" disabled>Select Labour Charge</option>
+            {laborCharges.map((charge) => (
+              <option key={charge._id} value={charge.totalCharges}>
+                {`${charge.siteName} - Total Charges: ${charge.totalCharges}`}
+              </option>
+            ))}
+          </select>
+        </div>
+
         {[
-          { label: "Labour Expenses", name: "labourExpenses" },
           { label: "Miscellaneous Expenses", name: "miscExpenses" },
           { label: "Transportation Cost", name: "transportationCost" },
           { label: "Equipment Rental Cost", name: "equipmentRentalCost" },

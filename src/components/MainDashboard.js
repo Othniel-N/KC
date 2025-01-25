@@ -7,6 +7,7 @@ import MaterialForm from "../components/MaterialForms";
 import InventoryDisplay from "./InventoryDisplay";
 import ReportComponent from "./ReportComponent";
 import ProjectManager from "./ProjectManager";
+import LaborCharges from "./LaborCharges";
 
 const MainDashboard = () => {
   const [activeComponent, setActiveComponent] = useState("home"); // Default component is 'Home'
@@ -49,6 +50,8 @@ const MainDashboard = () => {
         return <ReportComponent />;
       case "project":
         return <ProjectManager />;
+        case "laborcharges":
+          return <LaborCharges />;
       default:
         return <Home />;
     }
@@ -98,6 +101,14 @@ const MainDashboard = () => {
             onClick={() => handleMenuItemClick("add-materials")}
           >
             Add Materials
+          </li>
+          <li
+            className={`menu-item ${
+              activeComponent === "laborcharges" ? "active" : ""
+            }`}
+            onClick={() => handleMenuItemClick("laborcharges")}
+          >
+            Labor Charges
           </li>
           <li
             className={`menu-item ${

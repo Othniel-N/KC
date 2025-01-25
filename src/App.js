@@ -6,6 +6,7 @@ import DayExpenseForm from "./components/DayExpenseForm";
 import ExpenseDashboard from "./components/ExpenseDashboard";
 import MainDashboard from "./components/MainDashboard";
 import ProjectManager from "./components/ProjectManager";
+import LaborCharges from "./components/LaborCharges";
 
 const App = () => {
   return (
@@ -17,11 +18,12 @@ const App = () => {
           <Route path="/inventory" element={<InventoryDisplay />} />
           <Route path="/dayexpense" element={<DayExpenseForm />} />
           <Route path="/expensedashboard" element={<ExpenseDashboard />} />
-          <Route path="/main" element={<MainDashboard />} />
+          {/* <Route path="/main" element={<MainDashboard />} /> */}
           <Route path="/project" element={<ProjectManager />} />
+          <Route path="/labor" element={<LaborCharges />} />
           <Route
             path="/"
-            element={<h1 style={{ textAlign: "center" }}>Welcome to the Inventory Management App!</h1>}
+            element={<MainDashboard />}
           />
         </Routes>
       </div>

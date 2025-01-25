@@ -47,7 +47,7 @@ const MaterialForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/materials", formData);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/materials`, formData);
       alert("Material added successfully!");
       setFormData({
         name: "",

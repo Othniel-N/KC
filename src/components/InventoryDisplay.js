@@ -10,7 +10,7 @@ const InventoryDisplay = () => {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/materials");
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/materials`);
         setMaterials(response.data);
       } catch (error) {
         console.error("Error fetching materials:", error);
@@ -21,7 +21,7 @@ const InventoryDisplay = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/materials/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/materials/${id}`);
       setMaterials((prevMaterials) => prevMaterials.filter((material) => material._id !== id));
       alert("Material deleted successfully!");
     } catch (error) {
@@ -47,10 +47,13 @@ const InventoryDisplay = () => {
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/materials/${editingMaterial._id}`, {
-        quantity: Number(editValues.quantity),
-        price: Number(editValues.price),
-      });
+      const response = await axios.put(
+        `${process.env.REACT_APP_API_URL}/materials/${editingMaterial._id}`,
+        {
+          quantity: Number(editValues.quantity),
+          price: Number(editValues.price),
+        }
+      );
 
       setMaterials((prevMaterials) =>
         prevMaterials.map((material) =>
